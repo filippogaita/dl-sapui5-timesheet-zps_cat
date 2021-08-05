@@ -1,0 +1,24 @@
+/* Placeholders styles */
+::-webkit-input-placeholder { /* WebKit browsers */
+    text-transform: none;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    text-transform: none;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    text-transform: none;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    text-transform: none;
+}
+::placeholder { /* Recent browsers */
+    text-transform: none;
+}
+/* Style for View switch buttons of planning calendar toolbar content - NOT USED
+.planningCalendarViewSwitchButtons {
+    width: 350px !important;
+} */
+/* Style for dummy appointments of planning calendar rows, this class overrides a standard SAPUI5 class - NOT USED
+.sapUiCalendarAppDummy {
+    visibility: hidden !important;
+} */

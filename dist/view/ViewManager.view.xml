@@ -1,0 +1,122 @@
+<mvc:View
+    controllerName="zfioritimesheet3.zfioritimesheet3n.controller.ViewManager"
+    xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:unified="sap.ui.unified"
+    displayBlock="true"
+    height="100%">
+    <html:style>
+        .sapUiCalendarAppDummy {
+            visibility: hidden !important;
+        }
+    </html:style>
+    <Shell id="shellManager">
+        <App id="appManager">
+            <pages>
+                <Page
+                    id="pageManager"
+                    title="{i18n>viewManagerTitle}"
+                    showHeader="true"
+                    enableScrolling="true"
+                    showNavButton="true"
+                    navButtonPress="onNavBack">
+                    <content>
+						<VBox
+							id="vboxPlanCaleTeam"
+							class="sapUiTinyMargin">
+							<PlanningCalendar
+								id="planCaleTeam"
+								rows="{model: 'jsonManagerService', path: '/people', templateShareable: true}"
+								appointmentsVisualization="Filled"
+                                builtInViews="Hour,Day,Week"
+								showDayNamesLine="false"
+								showEmptyIntervalHeaders="true"
+								showIntervalHeaders="true"
+								showRowHeaders="true"
+								showWeekNumbers="true"
+                                stickyHeader="true"
+                                height="auto"
+								width="auto"
+                                appointmentSelect="handlePlanCaleTeamAppoSele"
+                                intervalSelect="handleTeamAppointmentAddWithContext">
+								<toolbarContent>
+									<Label
+										id="labelTeamAuthLevel"
+										text="{i18n>labelAuthLevel}"
+										textAlign="Begin"
+										wrapping="true"
+										labelFor="inputNoEditAuthLevel"
+										width="auto"/>
+									<Input
+										id="inputTeamNoEditAuthLevel"
+										type="Text"
+                                        value="{= ${jsonService>/people/0/manager} === true ? ${i18n>authManager} : ${i18n>authMember}}"
+										placeholder="---"
+										enabled="true"
+										editable="false"
+										width="auto"/>
+                                    <Button
+										id="btnTeamWbs"
+										type="Ghost"
+										text="{i18n>textBtnWbs}"
+										tooltip="{i18n>tooltipBtnWbs}"
+										press="onPressBtnWbs">
+		                            	<customData>
+		                        		    <core:CustomData
+                                                key="multi"
+                                                value="true"/>
+                            			</customData>
+                                    </Button>
+                                    <Button
+										id="btnTeamDays"
+										type="Ghost"
+										text="{i18n>textBtnDays}"
+										tooltip="{i18n>tooltipBtnDays}"
+										press="onPressBtnTeamDays"/>
+									<Button
+										id="btnTeamAddAppointment"
+										type="Ghost"
+										icon="sap-icon://add"
+										tooltip="{i18n>toolitipBtnAddAppointment}"
+										press="onPressBtnTeamAddAppointment"/>
+								</toolbarContent>
+								<rows>
+									<PlanningCalendarRow
+                                        key="{jsonManagerService>key}"
+                                        title="{jsonManagerService>title}"
+                                        text="{jsonManagerService>text}"
+                                        icon="{jsonManagerService>icon}"
+                                        appointments="{model: 'jsonManagerService', path: 'appointments', templateShareable: false}"
+                                        enableAppointmentsCreate="true"
+                                        enableAppointmentsDragAndDrop="false"
+                                        enableAppointmentsResize="true"
+                                        appointmentCreate="onPlanCaleTeamCreate"
+                                        appointmentDragEnter="onPlanCaleTeamDragEnter"
+                                        appointmentResize="onPlanCaleTeamResize">
+                                        <appointments>
+											<unified:CalendarAppointment
+												key="{jsonManagerService>key}"
+												title="{jsonManagerService>title}"
+												text="{jsonManagerService>text}"
+												startDate="{model: 'jsonManagerService', path: 'startDate', formatter: '.formatDateString'}"
+												endDate="{model: 'jsonManagerService', path: 'endDate', formatter: '.formatDateString'}"
+												icon="{jsonManagerService>icon}"
+                                                selected="{jsonManagerService>selected}"
+												tentative="{jsonManagerService>tentative}"					
+												type="{jsonManagerService>type}"
+                                                tooltip="{i18n>tooltipAppointment}"
+                                                dragDropConfig="{enabled: false}">
+											</unified:CalendarAppointment>
+										</appointments>
+									</PlanningCalendarRow>
+								</rows>
+							</PlanningCalendar>
+						</VBox>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

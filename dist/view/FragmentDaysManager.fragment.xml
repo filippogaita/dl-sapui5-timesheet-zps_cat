@@ -1,0 +1,89 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog
+        id="dialogDaysManager"
+        title="{i18n>textTitleDialogDays}"
+        contentHeight="100%"
+        contentWidth="55%"
+        draggable="true"
+        resizable="true">
+		<endButton>
+			<Button
+                id="btnCloseDialogDaysManager"
+                text="{i18n>textBtnCloseDialogDays}"
+                press="onPressBtnCloseDialogDaysManager"/>
+		</endButton>
+        <List
+            id="listDialogDaysManager"
+            items="{model: 'mainService', path: '/DaySet', templateShareable: true}"
+            noDataText="{i18n>textNoAvailableDays}"
+            sticky="HeaderToolbar,InfoToolbar"
+            updateFinished="onUpdateFinishedListDialogDaysManager">
+            <headerToolbar>
+                <OverflowToolbar width="auto">
+                    <ToolbarSpacer/>
+                    <Label
+                        text="{i18n>textEmployeeLabel}"
+                        labelFor="selectUserDialogDaysManager"
+                        width="auto"/>
+                    <Select
+                        id="selectUserDialogDaysManager"
+                        forceSelection="false"
+                        width="22%"
+                        change="onChangeSelectUserDialogDaysManager"
+                        items="{model: 'mainService', path: '/UserTeamSet', templateShareable: true,
+                            sorter: [   { path: 'Uname' },
+                                        { path: 'Pernr' }],
+                            filters: [  { path: 'InputUname', operator: 'EQ', value1: 'STEFANLU' }]}">
+                        <core:Item key="{mainService>Uname}" text="{mainService>Unamex}"/>
+                    </Select>
+                    <Label
+                        text="{i18n>textDateRangeLabelDialogDays}"
+                        labelFor="dateRangeWorkdateDialogDaysManager"
+                        width="auto"/>
+                    <DateRangeSelection
+                        id="dateRangeWorkdateDialogDaysManager"
+                        showFooter="true"
+                        width="29%"
+                        change="onChangeDateRangeWorkdateDialogDaysManager"/>
+                    <Label
+                        text="{i18n>textSwitchShowOnlyDaysInErrorLabelDialogDays}"
+                        labelFor="switchShowOnlyDaysInErrorDialogDaysManager"
+                        width="auto"/>
+                    <Switch
+                        id="switchShowOnlyDaysInErrorDialogDaysManager"
+                        customTextOff="{i18n>textCapitalNo}"
+                        customTextOn="{i18n>textCapitalYes}"
+                        change="onChangeSwitchShowOnlyDaysInErrorDialogDaysManager"/>
+                    <Button
+                        id="btnApplySelectedFiltersDialogDaysManager"
+                        type="Ghost"
+                        icon="sap-icon://filter"
+                        tooltip="{i18n>tooltipBtnApplySelectedFiltersDays}"
+                        press="onPressBtnApplySelectedFiltersDialogDaysManager"/>
+                </OverflowToolbar>
+            </headerToolbar>
+            <infoToolbar>
+                <OverflowToolbar width="auto">
+                    <Label
+                        id="labelInfoToolbarDialogDaysManager"
+                        text="{i18n>textDisplaydEntriesEmptyDialogDays}"
+                        width="auto"/>
+                </OverflowToolbar>
+            </infoToolbar>
+            <items>
+                <StandardListItem
+                    id="standardListItemDialogDaysManager"
+                    title="{model: 'mainService', path: 'Workdate', formatter: '.formatDateToMediumString'}"
+                    description="{i18n>textDaysDescriptionWorkedHours}{mainService>Catshours}"
+                    info="{mainService>Sapui5Info}"
+                    highlight="{mainService>Sapui5Highlight}"
+                    infoState="{mainService>Sapui5InfoState}"
+                    iconDensityAware="false"
+                    iconInset="false"
+                    wrapping="true"/>
+            </items>
+        </List>
+	</Dialog>
+</core:FragmentDefinition>
