@@ -1,1 +1,0 @@
-sap.ui.define(["zfiori_timesheet_3/zfiori_timesheet_3n/controller/ViewMain.controller"],function(e){"use strict";QUnit.module("ViewMain Controller");QUnit.test("I should test the ViewMain controller",function(i){var t=new e;t.onInit();i.ok(t)})});
