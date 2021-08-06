@@ -1,0 +1,89 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:smartList="sap.ui.comp.smartlist">
+    <TableSelectDialog
+        id="tableSelectDialogWbs"
+        noDataText="{i18n>textNoAvailableWbs}"
+        title="{i18n>tableSelectDialogWbsTitle}"
+        contentHeight="100%"
+        contentWidth="75%"
+        draggable="true"
+        multiSelect="false"
+        rememberSelections="false"
+        resizable="true"
+        showClearButton="false"
+        search=".handleSearchTableSelectDialogWbs"  
+        confirm=".handleSelectTableSelectDialogWbs"
+        cancel=".handleCloseTableSelectDialogWbs"
+        items="{model: 'mainService',
+                path: '/WbsSet',
+                templateShareable: true,
+                sorter: [{path: 'Pref', descending: true}, {path: 'Rproj', descending: true}],
+                filters: [{path: 'InputUname', operator: 'EQ', value1: 'STEFANLU'}]}">                          
+        <ColumnListItem
+            id="tableSelectDialogWbsTemplate"
+            type="Navigation"
+            vAlign="Middle">
+            <cells>
+                <ObjectIdentifier text="{mainService>Posid}"/>
+                <Text text="{mainService>Post1}"/>
+                <Text text="{mainService>Pbukr}"/>
+                <Text text="{mainService>Verna}"/>
+                <Text text="{mainService>usr10}"/>
+                <ToggleButton
+                    id="btnAddRemovePrefWbs"
+                    icon="sap-icon://favorite"
+                    tooltip="{i18n>toolitipBtnAddRemovePrefWbs}"
+                    pressed="{= ${mainService>Pref} === 'X'}"
+                    press="onPressBtnAddRemovePrefWbs"/>
+                <Text text=""/>
+            </cells>
+        </ColumnListItem>
+        <columns>
+            <Column width="auto">
+                <header>
+                    <Text text="{i18n>tableSelectDialogWbsColumnWbsHeader}"/>
+                </header>
+            </Column>
+            <Column
+                minScreenWidth="Tablet"
+                demandPopin="true"
+                width="auto">
+                <header>
+                    <Text text="{i18n>tableSelectDialogWbsColumnDescriptionHeader}"/>
+                 </header>
+            </Column>
+            <Column width="10%">
+                <header>
+                    <Text text="{i18n>tableSelectDialogWbsColumnCompanyHeader}"/>
+                </header>
+            </Column>
+            <Column width="13%">
+                <header>
+                    <Text text="{i18n>tableSelectDialogWbsColumnProjectManagerHeader}"/>
+                </header>
+            </Column>
+            <Column width="11%">
+                <header>
+                    <Text text="{i18n>tableSelectDialogWbsColumnCapitalizableHeader}"/>
+                </header>
+            </Column>
+            <Column width="10%">
+                <header>
+                    <Text text="{i18n>tableSelectDialogWbsColumnPreferredHeader}"/>
+                </header>
+            </Column>
+            <Column width="12%">
+                <header>
+                    <ToggleButton
+                        id="btnShowAllWbs"
+                        text="{i18n>textBtnShowAllWbs}"
+                        tooltip="{i18n>tooltipBtnShowAllWbs}"
+                        press="onPressBtnShowAllWbs"/>
+                </header>
+            </Column>
+        </columns>
+    </TableSelectDialog>
+</core:FragmentDefinition>
